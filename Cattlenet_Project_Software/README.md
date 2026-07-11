@@ -279,7 +279,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **GitHub Issues**: [https://github.com/abhishekp4512/CattleNet/issues](https://github.com/abhishekp4512/CattleNet/issues)
 - **Documentation**: See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment guide
 
 ---

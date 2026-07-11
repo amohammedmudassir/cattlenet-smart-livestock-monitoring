@@ -28,28 +28,16 @@ The system tracks three things in real time:
 - 🗄️ **Persistent storage** — sensor history stored in MongoDB for trend analysis
 
 ## 🏗️ System Architecture
-┌─────────────────────┐        ┌─────────────────────┐
-│  Environment Sensor  │──MQTT─▶│                     │
-│     (ESP8266)        │        │                     │
-├─────────────────────┤        │    MQTT Broker      │
-│   Feed Sensor         │──MQTT─▶│                     │
-│     (ESP8266)        │        │                     │
-├─────────────────────┤        │                     │
-│  Gate Arduino         │─Serial▶│  Bridge Script      │──MQTT─▶│
-│                       │        │  (Python)           │
-└─────────────────────┘        └─────────────────────┘
-│
-▼
-┌─────────────────┐
-│  Backend (Python) │
-│  + MongoDB        │
-└─────────────────┘
-│
-▼
-┌─────────────────┐
-│  React Dashboard  │
-│  (Vercel)         │
-└─────────────────┘
+
+```mermaid
+flowchart TD
+    A[Environment Sensor - ESP8266] -->|MQTT| D[MQTT Broker]
+    B[Feed Sensor - ESP8266] -->|MQTT| D
+    C[Gate Arduino] -->|Serial| E[Bridge Script - Python]
+    E -->|MQTT| D
+    D --> F[Backend - Python + MongoDB]
+    F --> G[React Dashboard - Vercel]
+```
 
 ## 🛠️ Tech Stack
 
@@ -60,16 +48,19 @@ The system tracks three things in real time:
 **Communication:** MQTT (device ↔ backend), REST API (backend ↔ frontend)
 
 ## 📁 Repository Structure
+
+```
 Cattlenet/
-├── Cattlenet_Hardware_Codes/     # ESP8266/Arduino firmware + serial-MQTT bridge
+├── Cattlenet_Hardware_Codes/
 │   ├── Environment_Device_ESP8266.ino
 │   ├── Feed_Monitoring_Device_ESP8266.ino
 │   ├── Gate_Device_Arduino.ino
 │   └── serial_to_mqtt_Gate_Device.py
 │
-└── Cattlenet_Software/           # Backend + frontend web application
-├── backend/                  # Python API, MQTT listeners, DB models
-└── src/                      # React dashboard
+└── Cattlenet_Software/
+    ├── backend/
+    └── src/
+```
 
 ## 🚀 Getting Started
 
